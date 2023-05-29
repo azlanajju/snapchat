@@ -172,3 +172,21 @@ body{
     color: #007bff;
   }
   
+
+
+  @media only screen and (max-width: 600px) {
+
+
+      .container{
+        width: 90vw;
+        margin-bottom: 200px;
+      }
+      .footer{
+        bottom: -52px;
+      }
+      .footer-links li a {
+        color: #888;
+        text-decoration: none;
+        font-size: 10px;
+      }
+  }
